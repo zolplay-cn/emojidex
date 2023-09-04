@@ -1,3 +1,14 @@
+<h1 align="center">
+EmojiDex 表情检察官 - 一个元钞银行的拓展包
+</h1>
+
+
+## Tech
+
+- [Nest.js](https://nestjs.com/)
+- [TypeScript](https://www.typescriptlang.org)
+- [Bolt by Slack](https://slack.dev/bolt)
+- PostgreSQL
 
 ## Installation
 
