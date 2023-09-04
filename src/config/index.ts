@@ -1,0 +1,1 @@
+const slack = {} as const
