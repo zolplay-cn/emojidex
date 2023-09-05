@@ -59,7 +59,7 @@ export const keywordEmojis: KeywordEmoji[] = [
   {
     pattern: /(nextjs|next\.js).*/i,
     emojis: ['nextjs'],
-    random: ['vercel:', 'clown_face'],
+    random: ['vercel', 'clown_face'],
   },
   {
     pattern: /(vercel|zeit).*/i,
