@@ -73,6 +73,19 @@ export const keywordEmojis: KeywordEmoji[] = [
     pattern: /(vue|vuejs|vue\.js).*/i,
     emojis: ['vue'],
   },
+  {
+    pattern: /(tql|卧槽).*/i,
+    emojis: ['tql'],
+    random: ['dddh', 'cow'],
+  },
+  {
+    pattern: /(think about it|机智|你懂的).*/i,
+    emojis: ['think-about-it'],
+  },
+  {
+    pattern: /(doge|狗头).*/i,
+    emojis: ['doge'],
+  },
 ]
 
 export const keywordToEmojis = (input: string): string[] => {
