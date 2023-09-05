@@ -83,4 +83,26 @@ export class CaptureService {
 
     await secretEmoji.save()
   }
+
+  async getEmojiCount(emoji: string) {
+    return await EmojiUsage.count({
+      where: { emoji },
+    })
+  }
+
+  async getEmojiUsage(emoji: string) {
+    const [allTime, monthly] = await Promise.all([
+      AllTimeEmojiUsage.findOne({
+        where: { emoji },
+      }),
+      MonthlyEmojiUsage.findOne({
+        where: { emoji, month: dayjs().format('YYYY-MM') },
+      }),
+    ])
+
+    return {
+      allTime: allTime ? allTime.count : 0,
+      monthly: monthly ? monthly.count : 0,
+    }
+  }
 }

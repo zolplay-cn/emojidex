@@ -17,6 +17,7 @@ export class AppService {
     @Inject(CaptureService)
     private readonly captureService: CaptureService,
   ) {
+    // listen for reactions
     slackService.app.event('reaction_added', async ({ event }) => {
       const messageDateTime = dayjs.unix(Number(event.item.ts))
       // get the difference in days between the message and now
@@ -34,6 +35,7 @@ export class AppService {
       })
     })
 
+    // listen for messages
     slackService.app.message(async ({ message }) => {
       if (message.subtype === 'message_deleted') return
       if (message.type !== 'message') return
@@ -44,7 +46,7 @@ export class AppService {
         return
       }
 
-      const foundEmojis: string[] = parseEmojis(text)
+      const foundEmojis = parseEmojis(text)
       // no emojis, get outta here
       if (foundEmojis.length > 0) {
         // persist emojis
@@ -62,6 +64,34 @@ export class AppService {
       for (const reaction of reactions) {
         await this.slackService.react(reaction, ts, channel)
       }
+    })
+
+    // listen for slash commands
+    slackService.app.command('/emoji_usage', async ({ ack, command, say }) => {
+      await ack()
+
+      let response = ''
+      const emojis = parseEmojis(command.text)
+      for (const emoji of emojis) {
+        const { allTime, monthly } = await captureService.getEmojiUsage(emoji)
+        if (allTime === 0) {
+          response += `- :${emoji}:：从未被用过\n`
+          continue
+        }
+
+        response += `- :${emoji}:：本月被用过 *${monthly}* 次，一共被用过 *${allTime}* 次\n`
+      }
+
+      if (response === '') {
+        response = '请输入至少一个 emoji'
+      } else {
+        response = `*表情用量如下*\n${response}`
+      }
+
+      await say({
+        text: `<@${command.user_id}> ${response}`,
+        mrkdwn: true,
+      })
     })
   }
 }
