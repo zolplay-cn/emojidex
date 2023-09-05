@@ -53,8 +53,25 @@ export const keywordEmojis: KeywordEmoji[] = [
   {
     pattern: /(哈哈哈).*/i,
     emojis: ['joy'],
-    random: [':rolling_on_the_floor_laughing:', 'palm_cry', 'laughing'],
+    random: ['laughing'],
     probability: 0.6,
+  },
+  {
+    pattern: /(nextjs|next\.js).*/i,
+    emojis: ['nextjs'],
+    random: ['vercel:', 'clown_face'],
+  },
+  {
+    pattern: /(vercel|zeit).*/i,
+    emojis: ['vercel'],
+  },
+  {
+    pattern: /(react|reactjs|react\.js).*/i,
+    emojis: ['react'],
+  },
+  {
+    pattern: /(vue|vuejs|vue\.js).*/i,
+    emojis: ['vue'],
   },
 ]
 
