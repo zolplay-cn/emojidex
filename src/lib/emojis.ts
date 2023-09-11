@@ -79,7 +79,7 @@ export const keywordEmojis: KeywordEmoji[] = [
     random: ['dddh', 'cow'],
   },
   {
-    pattern: /(think about it|机智|你懂的).*/i,
+    pattern: /(think-about-it|机智|你懂的).*/i,
     emojis: ['think-about-it'],
   },
   {
